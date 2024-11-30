@@ -44,8 +44,8 @@
                 "${file}",
                 "-o",
                 "main",
-                "-L/usr/local/lib",
-                "-lfmt",
+                // "-L/usr/local/lib",
+                // "-lfmt",
             ],
             "options": {
                 "cwd": "out"
