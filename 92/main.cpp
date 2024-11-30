@@ -25,28 +25,17 @@ struct Coord {
   T x{}, y{};
 };
 
-// template <typename T>
-// constexpr bool operator==(const Coord<T>& lhs, const Coord<T>& rhs) {
-//   return (lhs.x == rhs.x) && (lhs.y == rhs.y);
-// }
+template <typename T>
+constexpr bool operator==(const Coord<T>& lhs, const Coord<T>& rhs) {
+  return (lhs.x == rhs.x) && (lhs.y == rhs.y);
+}
 
-// template <typename T>
-// struct std::hash<Coord<T>> {
-//   size_t operator()(const Coord<T>& c) const {
-//     return static_cast<size_t>(c.x) + static_cast<size_t>(c.y);
-//   }
-// };
-
-// template <typename T>
-// struct std::formatter<Coord<T>> : formatter<string_view> {
-//   auto format(Coord<T> &c, format_context& ctx) const;
-// };
-
-// template <typename T>
-// auto std::formatter<Coord<T>>::format(Coord<T> &c, format_context& ctx) const {
-//   auto ss = std::format("{} {}", c.x, c.y);
-//   return formatter<string_view>::format(ss, ctx);
-// }
+template <typename T>
+struct std::hash<Coord<T>> {
+  size_t operator()(const Coord<T>& c) const {
+    return static_cast<size_t>(c.x) + static_cast<size_t>(c.y);
+  }
+};
 
 template <>
 struct std::formatter<Coord<int>> {
@@ -58,9 +47,6 @@ struct std::formatter<Coord<int>> {
   template <typename FC>
   auto format(const Coord<int>& ps, FC& ctx) const {
     return std::format_to(ctx.out(), "{} {}", ps.x, ps.y);
-    // string ss{};
-    // for (auto p : ps) ss.append(std::format("{} {}\n", p.name, p.mass));
-    // return format_to(ctx.out(), "{}", ss);
   }
 };
 
@@ -136,8 +122,7 @@ int main() {
   }
 
   {
-    // BROKEN
     auto cm = Coordmap{{{3, 3}, 3}, {{2, 2}, 2}};
-    // print("{}\n", cm);
+    print("{}\n", cm);
   }
 }
